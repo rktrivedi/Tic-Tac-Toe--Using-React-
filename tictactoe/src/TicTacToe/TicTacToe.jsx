@@ -6,20 +6,20 @@ import VanillaTilt from "vanilla-tilt";
 import { useEffect } from "react";
 
 const TicTacToe = () => {
-  //   useEffect(() => {
-  //     VanillaTilt.init(document.querySelectorAll(".Block"), {
-  //       max: 1,
-  //       speed: 10,
-  //       glare: true,
-  //       "max-glare": 0.5,
-  //     });
-  //   }, []); // Empty dependency array to ensure it runs once
+  useEffect(() => {
+    VanillaTilt.init(document.querySelectorAll(".Block"), {
+      max: 5,
+      speed: 10,
+      glare: true,
+      "max-glare": 1,
+    });
+  }, []); // Empty dependency array to ensure it runs once
   return (
     <div className="container">
-      <h1 className="title"> Tic Tac Toe Game</h1>
       <div className="board">
         <Board />
       </div>
+      <button className="reset">Reset</button>
     </div>
   );
 };
@@ -27,6 +27,10 @@ const TicTacToe = () => {
 function Board({ dot, cross }) {
   const [marks, setMarks] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [player, setPlayer] = useState(1);
+
+  //   const reset = () => {
+  //     const [marks, setMarks] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  //   };
 
   useEffect(() => {
     const combination = [
@@ -61,7 +65,7 @@ function Board({ dot, cross }) {
     }
   };
   return (
-    <div className="contain">
+    <div className="board">
       <div>
         <Block changeMark={changeMark} mark={marks[0]} position={0}></Block>
         <Block changeMark={changeMark} mark={marks[1]} position={1}></Block>
@@ -83,10 +87,12 @@ function Board({ dot, cross }) {
 
 function Block({ mark, changeMark, position }) {
   return (
-    <div
-      className={`Block mark${mark}`}
-      onClick={(e) => changeMark(position)}
-    ></div>
+    <div className="imgContainer">
+      <div
+        className={`Block mark${mark}`}
+        onClick={(e) => changeMark(position)}
+      ></div>
+    </div>
   );
 }
 
